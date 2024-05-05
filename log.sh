@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker logs -f mangata-finalizer-node
+docker logs -f avs-finalizer-node
