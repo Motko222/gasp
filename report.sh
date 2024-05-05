@@ -9,6 +9,7 @@ bucket=node
 
 case $docker_status in
   running) status="ok" ;;
+  restarting) status="warning"; message="docker restarting" ;;
   *) status="error"; message="docker not running" ;;
 esac
 
