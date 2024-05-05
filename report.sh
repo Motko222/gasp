@@ -2,9 +2,9 @@
 
 source ~/.bash_profile
 
-docker_status=$(docker inspect mangata-finalizer-node | jq -r .[].State.Status)
-id=mangata-$MANGATA_ID
-chain=testnet
+docker_status=$(docker inspect avs-finalizer-node | jq -r .[].State.Status)
+id=gasp-$GASP_ID
+chain=holesky
 bucket=node
 
 case $docker_status in
