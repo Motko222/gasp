@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f /root/eigenlayer/cli/operator/config/operator-config.yaml ]
+if [ ! -f /root/eigenlayer/operator.yaml ]
 then
  echo "eigenlayer operator setup not found, exiting..."
  exit 1
@@ -15,9 +15,9 @@ chmod +x run.sh
 read -p "ws rpc url? " ws
 read -p "wallet password? " pwd
 
-http=$(cat /root/eigenlayer/cli/operator/config/operator-config.yaml | grep eth_rpc_url | awk '{print $2}' )
-ecdsa=$(cat /root/eigenlayer/cli/operator/config/operator-config.yaml | grep -w private_key_store_path: | awk -F "operator_keys/" '{print $NF}' )
-bls=$(cat /root/eigenlayer/cli/operator/config/operator-config.yaml | grep -w bls_private_key_store_path: | awk -F "operator_keys/" '{print $NF}' )
+http=$(cat /root/eigenlayer/operator.yaml | grep eth_rpc_url | awk '{print $2}' )
+ecdsa=$(cat /root/eigenlayer/operator.yaml | grep -w private_key_store_path: | awk -F "operator_keys/" '{print $NF}' )
+bls=$(cat /root/eigenlayer/operator.yaml | grep -w bls_private_key_store_path: | awk -F "operator_keys/" '{print $NF}' )
 
 sed -i "s#ETH_RPC_URL=#ETH_RPC_URL=$http#" .env
 sed -i "s#ETH_WS_URL=#ETH_WS_URL=$ws#" .env
