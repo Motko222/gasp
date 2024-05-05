@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/scripts/mangata
+cd ~/scripts/gasp
 git stash push --include-untracked
 git pull
 chmod +x *.sh
