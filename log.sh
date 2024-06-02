@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker logs -f avs-finalizer-node
+docker logs -n 100 -f avs-finalizer-node
