@@ -2,4 +2,4 @@
 
 cd ~/avs-operator-setup
 docker-compose up -d
-docker logs -f avs-finalizer-node
+docker logs -n 200 -f avs-finalizer-node
