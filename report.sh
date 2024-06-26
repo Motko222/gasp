@@ -3,9 +3,10 @@
 source ~/.bash_profile
 
 docker_status=$(docker inspect avs-finalizer-node | jq -r .[].State.Status)
-id=gasp-$GASP_ID
+id=$GASP_ID
+network=testnet
 chain=holesky
-bucket=node
+group=node
 
 case $docker_status in
   running) status="ok" ;;
@@ -18,6 +19,7 @@ cat << EOF
 {
   "id":"$id",
   "machine":"$MACHINE",
+  "network":"$network",
   "chain":"$chain",
   "type":"node",
   "status":"$status",
@@ -31,11 +33,11 @@ EOF
 if [ ! -z $INFLUX_HOST ]
 then
  curl --request POST \
- "$INFLUX_HOST/api/v2/write?org=$INFLUX_ORG&bucket=$bucket&precision=ns" \
+ "$INFLUX_HOST/api/v2/write?org=$INFLUX_ORG&bucket=$INFLUX_BUCKET&precision=ns" \
   --header "Authorization: Token $INFLUX_TOKEN" \
   --header "Content-Type: text/plain; charset=utf-8" \
   --header "Accept: application/json" \
   --data-binary "
-    status,node=$id,machine=$MACHINE status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\" $(date +%s%N) 
+    report,id=$id,machine=$MACHINE,grp=$group status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\",network=\"$network\" $(date +%s%N) 
     "
 fi
