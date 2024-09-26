@@ -6,11 +6,8 @@ json=~/logs/report-$folder
 source ~/.bash_profile
 
 docker_status=$(docker inspect avs-finalizer-node | jq -r .[].State.Status)
-id=$GASP_ID
 network=testnet
 chain=holesky
-group=node
-owner=$OWNER
 
 case $docker_status in
   running) status="ok" ;;
@@ -23,7 +20,7 @@ cat >$json << EOF
   "updated":"$(date --utc +%FT%TZ)",
   "measurement":"report",
   "tags": {
-         "id":"$folder",
+         "id":"$GASP_ID",
          "machine":"$MACHINE",
          "grp":"node",
          "owner":"$OWNER"
