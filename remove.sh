@@ -8,10 +8,10 @@ cd ~/avs-operator-setup
 docker-compose down
 
 mv -f /root/avs-operator-setup /root/backup
-mv -f /root/eigenlayer /root/backup
+mv -f /root/.eigenlayer /root/backup
 [ -d /root/backup/scripts ] || mkdir /root/backup/scripts/$folder
 mv -f /root/scripts/$folder/* /root/backup/scripts/$folder
 rm -r /root/scripts/$folder
-bash /root/scripts/system/influx-delete-d.sh $folder
+bash /root/scripts/system/influx-delete-id.sh $folder
 
 
